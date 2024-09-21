@@ -14,6 +14,13 @@
 	<name>Constraynt</name>
 	<description>Constraynt is a field validation package that provides easy-to-use annotations for validations.</description>
 	<url/>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub OWNER Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+		</repository>
+	</distributionManagement>
 	<licenses>
 		<license>
 			<name>MIT License</name>
