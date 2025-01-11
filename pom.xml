@@ -24,8 +24,8 @@
 
     <developers>
         <developer>
-            <id>yourFriendlyNeighbourhoodBatman</id>
-            <name>BATMAN</name>
+            <id>yourFriendlyNeighbourhoodDev</id>
+            <name>Dev</name>
             <roles>
                 <role>developer</role>
                 <role>package manager</role>
@@ -43,7 +43,7 @@
         <repository>
             <id>github</id>
             <name>GitHub devhamzat Apache Maven Packages</name>
-            <url>https://github.com/devhamzat/constraynt</url>
+            <url>https://maven.pkg.github.com/devhamzat/constraynt</url>
         </repository>
     </distributionManagement>
 

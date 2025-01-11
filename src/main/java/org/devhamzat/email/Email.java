@@ -1,4 +1,4 @@
-package org.constraynt.email;
+package org.devhamzat.email;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

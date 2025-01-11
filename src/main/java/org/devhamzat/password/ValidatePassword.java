@@ -1,4 +1,4 @@
-package org.constraynt.password;
+package org.devhamzat.password;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

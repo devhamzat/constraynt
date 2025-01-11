@@ -1,4 +1,4 @@
-package org.constraynt.file.image;
+package org.devhamzat.file.image;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

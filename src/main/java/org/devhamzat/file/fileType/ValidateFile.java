@@ -1,4 +1,4 @@
-package org.constraynt.file.fileType;
+package org.devhamzat.file.fileType;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
