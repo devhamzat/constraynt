@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-<groupId>org.constraynt</groupId>
+<groupId>org.devhamzat</groupId>
     <artifactId>Constraynt</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -43,7 +43,7 @@
         <repository>
             <id>github</id>
             <name>GitHub devhamzat Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/devhamzat/constraynt</url>
+            <url>https://github.com/devhamzat/constraynt</url>
         </repository>
     </distributionManagement>
 
