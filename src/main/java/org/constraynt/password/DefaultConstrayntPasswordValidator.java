@@ -6,11 +6,18 @@ import org.passay.dictionary.WordListDictionary;
 
 import java.util.Arrays;
 import java.util.List;
-
+// DefaultConstrayntPasswordValidator.java
+/**
+ * Default implementation of the ConstrayntPasswordValidator interface.
+ * This class uses the Passay library to perform password validation.
+ */
 public class DefaultConstrayntPasswordValidator implements ConstrayntPasswordValidator {
     private final PasswordValidator validator;
     private List<String> errorMessages;
-
+    /**
+     * Constructs a new DefaultConstrayntPasswordValidator with default rules.
+     * The default rules include length requirements and character type requirements.
+     */
     public DefaultConstrayntPasswordValidator() {
         WordListDictionary wordListDictionary = new WordListDictionary(
                 new ArrayWordList(new String[]{"password", "username"}));
