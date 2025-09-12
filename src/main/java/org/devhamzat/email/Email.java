@@ -12,7 +12,7 @@ import static java.util.regex.Pattern.CASE_INSENSITIVE;
 public class Email implements ConstraintValidator<ValidateEmail, CharSequence> {
     private static final int MAX_LOCAL_PART_LENGTH = 64;
     private static final String LOCAL_PART_ATOM = "[a-z0-9!#$%&'*+/=?^_`{|}~\u0080-\uFFFF-]";
-    private static final String LOCAL_PART_INSIDE_QUOTES_ATOM = "(?:[a-z0-9!#$%&'*.(),<>\\[\\]:;  @+/=?^_`{|}~\u0080-\uFFFF-]|\\\\\\\\|\\\\\\\")";
+    private static final String LOCAL_PART_INSIDE_QUOTES_ATOM = "[a-z0-9!#$%&'*.(),<>\\[\\]:;  @+/=?^_`{|}~\u0080-\uFFFF-]|\\\\\\\\|\\\\\"";
 
     private static final Pattern LOCAL_PART_PATTERN = Pattern.compile(
             "(?:" + LOCAL_PART_ATOM + "+|\"" + LOCAL_PART_INSIDE_QUOTES_ATOM + "+\")" +
