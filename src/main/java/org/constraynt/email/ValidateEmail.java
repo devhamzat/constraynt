@@ -1,4 +1,4 @@
-package org.devhamzat.email;
+package org.constraynt.email;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

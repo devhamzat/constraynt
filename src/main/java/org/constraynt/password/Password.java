@@ -1,4 +1,4 @@
-package org.devhamzat.password;
+package org.constraynt.password;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

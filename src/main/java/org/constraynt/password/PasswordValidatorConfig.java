@@ -1,4 +1,4 @@
-package org.devhamzat.password;
+package org.constraynt.password;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
