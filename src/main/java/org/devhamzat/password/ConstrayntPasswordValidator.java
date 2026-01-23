@@ -1,4 +1,4 @@
-package org.constraynt.password;
+package org.devhamzat.password;
 
 /**
  * Interface for password validation in the Constraynt library.
