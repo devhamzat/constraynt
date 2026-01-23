@@ -10,12 +10,10 @@ import org.springframework.context.annotation.Configuration;
 public class PasswordValidatorConfig {
     /**
      * Creates and configures the default ConstrayntPasswordValidator bean.
-     *
-     * @return A new instance of DefaultConstrayntPasswordValidator.
      */
     @Bean
-    @ConditionalOnMissingBean(DefaultConstrayntPasswordValidator.class)
-    public DefaultConstrayntPasswordValidator defaultConstrayntPasswordValidator() {
+    @ConditionalOnMissingBean(ConstrayntPasswordValidator.class)
+    public ConstrayntPasswordValidator constrayntPasswordValidator() {
         return new DefaultConstrayntPasswordValidator();
     }
 }

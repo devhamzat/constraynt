@@ -20,25 +20,36 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({FIELD, ANNOTATION_TYPE})
 @Retention(value = RUNTIME)
 public @interface ValidatePassword {
-    /**
-     * Defines the error message to be used when the password validation fails.
-     *
-     * @return The error message.
-     */
-    String message() default "Invalid password";
-
-    /**
-     * Defines the validation groups to which this constraint belongs.
-     *
-     * @return The validation groups.
-     */
+    // Use message key so consumers can localize
+    String message() default "{org.constraynt.password.ValidatePassword}";
 
     Class<?>[] groups() default {};
 
-    /**
-     * Defines the payload associated with the constraint.
-     *
-     * @return The payload.
-     */
     Class<? extends Payload>[] payload() default {};
+    boolean required() default true;
+
+    int minLength() default 8;
+
+    int maxLength() default 64;
+
+    boolean requireUppercase() default true;
+
+    boolean requireLowercase() default true;
+
+    boolean requireDigit() default true;
+
+    boolean requireSpecial() default true;
+
+    boolean disallowWhitespace() default true;
+
+    boolean isBlockedStringsEnabled() default false;
+
+    String[] blockedSubstrings() default {"password", "qwerty", "123456", "letmein"};
+
+    boolean isDictionaryEnabled() default false;
+
+    boolean enableDefaultDictionary() default true;
+
+
+    boolean exposeAllViolations() default false;
 }
