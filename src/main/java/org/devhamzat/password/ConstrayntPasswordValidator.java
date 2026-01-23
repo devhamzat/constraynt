@@ -1,24 +1,15 @@
 package org.devhamzat.password;
 
-import java.util.List;
-
 /**
  * Interface for password validation in the Constraynt library.
  * Implementations of this interface provide custom password validation logic.
  */
 public interface ConstrayntPasswordValidator {
     /**
-     * Validates the given password against the implemented rules.
-     *
-     * @param password The password to validate.
-     * @return true if the password is valid, false otherwise.
+     * Validates the given password against the provided policy.
+     * @param rawPassword the password text to validate.
+     * @param policy the policy describing rule configuration.
+     * @return validation result including message codes when invalid.
      */
-    boolean validate(String password);
-    /**
-     * Retrieves the error messages generated during the last validation.
-     *
-     * @return A list of error messages, or an empty list if no errors occurred.
-     */
-    List<String> getErrorMessages();
-
+    PasswordValidationResult validate(String rawPassword, PasswordPolicy policy);
 }

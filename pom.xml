@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-<groupId>org.devhamzat</groupId>
+    <groupId>org.constraynt</groupId>
     <artifactId>constraynt</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Constraynt</name>
@@ -24,8 +24,8 @@
 
     <developers>
         <developer>
-            <id>yourFriendlyNeighbourhoodDev</id>
-            <name>Dev</name>
+            <id>yourFriendlyNeighbourhoodBatman</id>
+            <name>BATMAN</name>
             <roles>
                 <role>developer</role>
                 <role>package manager</role>
@@ -74,15 +74,15 @@
             <version>1.6.4</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>6.1.11</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <version>3.0.5</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

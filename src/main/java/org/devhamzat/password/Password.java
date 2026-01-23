@@ -3,50 +3,95 @@ package org.devhamzat.password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.validator.constraintvalidation.HibernateConstraintValidatorContext;
+
+import java.util.Arrays;
 
 /**
- * Implementation of ConstraintValidator for password validation.
- * This class validates passwords annotated with {@link ValidatePassword} annotation.
- * It uses {@link DefaultConstrayntPasswordValidator} for the actual password validation logic.
+ * ConstraintValidator for @ValidatePassword using a pluggable ConstrayntPasswordValidator.
  */
 public class Password implements ConstraintValidator<ValidatePassword, String> {
 
-    /**
-     * The default password validator used for validating passwords.
-     */
     @Autowired
-    private DefaultConstrayntPasswordValidator defaultConstrayntPasswordValidator;
+    private ConstrayntPasswordValidator validator;
 
-    /**
-     * Validates the given password.
-     *
-     * @param password The password to validate. Can be null.
-     * @param context The constraint validator context.
-     * @return true if the password is valid, false otherwise.
-     */
+    private ValidatePassword annotation;
+
     @Override
-    public boolean isValid(String password, ConstraintValidatorContext context) {
-        if (password == null) {
-            addConstraintViolation(context, "Password cannot be null");
-            return false;
-        }
-
-        boolean isValid = defaultConstrayntPasswordValidator.validate(password);
-        if (!isValid) {
-            addConstraintViolation(context, String.join(", ", defaultConstrayntPasswordValidator.getErrorMessages()));
-        }
-        return isValid;
+    public void initialize(ValidatePassword constraintAnnotation) {
+        this.annotation = constraintAnnotation;
     }
 
-    /**
-     * Adds a constraint violation to the context.
-     *
-     * @param context The constraint validator context.
-     * @param message The error message to add.
-     */
-    private void addConstraintViolation(ConstraintValidatorContext context, String message) {
+    @Override
+    public boolean isValid(String value, ConstraintValidatorContext context) {
+        // Presence handling according to `required` flag
+        if (value == null || value.isEmpty()) {
+            if (annotation.required()) {
+                // Emit presence-specific message and fail
+                context.disableDefaultConstraintViolation();
+                context.buildConstraintViolationWithTemplate("{constraynt.password.null}")
+                        .addConstraintViolation();
+                return false;
+            } else {
+                // Not required: empty is allowed; skip further checks
+                return true;
+            }
+        }
+
+        PasswordPolicy policy = new PasswordPolicy(
+                annotation.minLength(),
+                annotation.maxLength(),
+                annotation.requireUppercase(),
+                annotation.requireLowercase(),
+                annotation.requireDigit(),
+                annotation.requireSpecial(),
+                annotation.disallowWhitespace(),
+                Arrays.asList(annotation.blockedSubstrings()),
+                annotation.enableDefaultDictionary(),
+                annotation.isBlockedStringsEnabled(),
+                annotation.isDictionaryEnabled()
+        );
+
+        if (validator == null) {
+            throw new IllegalStateException("ConstrayntPasswordValidator bean is not initialized. Ensure Spring is configuring ConstraintValidator instances or provide a validator.");
+        }
+
+        PasswordValidationResult result = validator.validate(value, policy);
+        if (result.valid()) {
+            return true;
+        }
+
+        // Prepare to add message parameters for interpolation (min/max)
         context.disableDefaultConstraintViolation();
-        context.buildConstraintViolationWithTemplate(message)
-                .addConstraintViolation();
+        HibernateConstraintValidatorContext hctx = null;
+        try {
+            hctx = context.unwrap(HibernateConstraintValidatorContext.class);
+            hctx = hctx.addMessageParameter("minLength", policy.minLength)
+                       .addMessageParameter("maxLength", policy.maxLength);
+        } catch (Exception ignored) {
+            // Not running with Hibernate Validator; fall back without parameters
+        }
+
+        if (annotation.exposeAllViolations()) {
+            for (String code : result.messageCodes()) {
+                if (hctx != null) {
+                    hctx.buildConstraintViolationWithTemplate("{" + code + "}")
+                        .addConstraintViolation();
+                } else {
+                    context.buildConstraintViolationWithTemplate("{" + code + "}")
+                           .addConstraintViolation();
+                }
+            }
+        } else {
+            String first = result.messageCodes().isEmpty() ? "constraynt.password.invalid" : result.messageCodes().get(0);
+            if (hctx != null) {
+                hctx.buildConstraintViolationWithTemplate("{" + first + "}")
+                    .addConstraintViolation();
+            } else {
+                context.buildConstraintViolationWithTemplate("{" + first + "}")
+                       .addConstraintViolation();
+            }
+        }
+        return false;
     }
 }
