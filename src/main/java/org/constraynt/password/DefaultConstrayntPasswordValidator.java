@@ -1,4 +1,4 @@
-package org.devhamzat.password;
+package org.constraynt.password;
 
 import org.passay.*;
 import org.passay.dictionary.Dictionary;

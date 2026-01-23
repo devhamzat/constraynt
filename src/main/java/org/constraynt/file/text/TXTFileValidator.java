@@ -1,4 +1,4 @@
-package org.devhamzat.file.text;
+package org.constraynt.file.text;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
